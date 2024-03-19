@@ -1,0 +1,37 @@
+<%if user_signed_in?%>
+  <%= link_to  "Profile", user_path(current_user) %>
+  <%= link_to  "Sign out", destroy_user_session_path %>
+  <%= link_to 'Create event', new_event_path %>
+<%else%>
+<%= link_to "Sing in", new_user_session_path%>
+<% end %>
+
+<header>
+  <h1>Discover best experiences for you!</h1>
+</header>
+<section class = "event_index">
+    <h2> Today's events: </h2>
+    <% Event.today.each do |event| %>
+        <h3><td><%= link_to event.title, event_path(event)%></td><h3>
+        <h4><td>Today</td><th>*</th><td><%= event.formatted_time %></td>
+        <br>
+        <td><%= event.location%></td><h4>
+    <%end%>
+
+    <h2> Future events: </h2>
+    <% Event.future.each do |event| %>
+        <li>
+        <h3><td><%= link_to event.title, event_path(event)%></td><h3>
+        <h4><td><%= event.formatted_date %></td><th> </th><td><%= event.formatted_time %></td>
+        <br>
+        <td><%= event.location%></td><h4>
+        </li>
+    <%end%>
+
+    <h2> Explore past events: </h2>
+    <% Event.past.each do |event| %>
+        <li>
+        <h3><td><%= link_to event.title, event_path(event)%></td><h3>
+        </li>
+    <%end%>
+</section>

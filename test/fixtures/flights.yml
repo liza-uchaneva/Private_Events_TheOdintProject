@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  departure: MyString
+  id: 1
+  start: 2024-03-18 13:59:28
+  duration: 2024-03-18 13:59:28
+
+two:
+  departure: MyString
+  id: 1
+  start: 2024-03-18 13:59:28
+  duration: 2024-03-18 13:59:28

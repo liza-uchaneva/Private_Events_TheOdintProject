@@ -1,0 +1,56 @@
+<%= link_to  "Index", events_path %>
+<% if user_signed_in? %>
+  <%= link_to 'Create event', new_event_path %>
+  <%= link_to  "Sign out", destroy_user_session_path %>
+  <%= link_to  "Profile", user_path(current_user) %>
+<% end %>
+
+<p><strong>My Created Events</strong></p>
+<% if @events.any?%>
+    <div>
+        <ul>
+            <% @events.each do |event| %>
+                <li class="event-card">
+                    <p class="event-title"><strong>
+                    <%= link_to event.title, event_path(event) %>
+                    </strong></p>
+                    <p class="event-description">Description:<%= event.description %></p>
+                    <%= link_to "Edit", edit_event_path(event), method: :post %>
+                </li>
+            <% end%>
+        </ul>
+    </div>
+<%else%>
+       <p>no events</p>
+<% end%>
+
+<div><p><strong>Events I'm attending</strong></p></div>
+<% if @attended_events.any?%>      
+    <div class="past_events">
+       <p class="past_events">Past Events:</p>
+       <ul>
+           <% @user.attended_events.past_events.each do |event| %>
+              <li class="event-card past">
+                   <p class="event-title">
+                       <strong><%= link_to event.title, event_path(event) %></strong></p>
+                   <p class="event-description">Description:<%= event.description %></p>
+              </li>
+            <%end%>
+       </ul>
+    </div>
+
+    <div class="upcoming_events">
+        <p class="upcoming_events">Upcoming Events:</p>
+        <ul>
+           <% @user.attended_events.upcoming_events.each do |event| %>
+                <li class="event-card past">
+                   <p class="event-title">
+                   <strong><%= link_to event.title, event_path(event) %></strong></p>
+                   <p class="event-description">Description:<%= event.description %></p>
+                </li>
+           <%end%>
+        </ul>
+    </div>
+<%else%>
+   <p>no events</p>
+<%end%>
